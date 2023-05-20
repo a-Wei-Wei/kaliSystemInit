@@ -1,0 +1,18 @@
+---
+- name: palybook-2-extends
+  hosts: local
+  remote_user: root
+  tasks:
+    - name: copy-tumx-from-git
+      copy:
+        src: files/tmux-3.3a.tar.gz
+        dest: /tmp/tumx.tar.gz
+    - name: compile-tmux
+      shell: cd /tmp/;tar -xvf tumx.tar.gz;apt install libevent-dev;cd tmux-3.3a/;./configure && make
+    - name: install-tmux
+      shell: cd /tmp/tmux-3.3a;make insatll
+      register: returnmsgtumx
+    - name: print-msg
+      debug:
+        var: returnmsgtumx
+

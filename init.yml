@@ -1,0 +1,37 @@
+---
+- name: test-1 
+  hosts: local
+  remote_user: root
+  tasks:
+    - name: bak source.list
+      shell: cp /etc/apt/sources.list /etc/apt/sources.list.bak
+    - name: update apt service config 
+      copy:
+        dest: /etc/apt/sources.list
+        src: sources.list
+    - name: apt update
+      shell: apt update
+        #    - name: create pip.conf
+        #      shell: mkdir ~/.pip
+        #      ignore_errors: true
+        #      register: returnmsg
+        #    - name: cp pip.conf
+        #      when: returnmsg.rc == 0
+        #      copy:
+        #        src: files/pip.conf
+        #        dest: ~/.pip/pip.conf
+    - name: install pwntools
+      ansible.builtin.pip:
+        name: pwntools
+      register: msg
+    - name: print-msg
+      debug:
+        var: msg.stdout
+    - name: install libcSearch
+      ansible.builtin.pip:
+        name: LibcSearcher3
+      register: msg2
+    - name: print-msg
+      debug:
+        var: msg2.stdout
+

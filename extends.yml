@@ -1,0 +1,20 @@
+---
+- name: palybook-2-extends
+  hosts: local
+  remote_user: root
+  tasks:
+    - name: install-java-8-mkdir-directory
+      shell: mkdir /usr/local/share/application
+      register: returnmsg
+    - name: chekc-error
+      when: returnmsg.rc == 0
+      shell: cd /usr/local/share/application;wget https://repo.huaweicloud.com/java/jdk/8u202-b08/jdk-8u202-linux-x64.tar.gz
+    - name: uncompass tar
+      shell: cd /usr/local/share/application;tar -xvf jdk-8u202-linux-x64.tar.gz
+      register: returnmsg_uncompass
+    - name: print_msgg
+      debug:
+        var: returnmsg_uncompass
+    - name: replace_origin_java
+      shell: mv /usr/bin/java /usr/bin/java-17;ln -s /usr/local/share/application/jdk1.8.0_202/bin/java /usr/bin/java
+
