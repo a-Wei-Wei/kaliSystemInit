@@ -15,4 +15,10 @@
     - name: print-msg
       debug:
         var: returnmsgtumx
+    - name: install-ngxtop
+      shell: pip3 install ngxtop
+      register: returnmsg
+    - name: print-msg
+      debug:
+        var: returnmsg
 
