@@ -6,7 +6,11 @@ sed -i 's/^#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/ssh
 sed -i 's/^#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/' /etc/ssh/sshd_config
 sed -i 's/^#Port 22/Port 22/' /etc/ssh/sshd_config
 echo "=== restart ssh service  ==="
-service ssh restart
+service ssh restart;
+echo "=== register ssh service to reboot auto start ==="
+systemctl enable ssh;
+echo "=== create dir /mnt/hgfs ==="
+mkdir /mnt/hgfs;
 echo " == mkdir .pip == "
 sudo mkdir ~/.pip
 echo "[global]\nindex-url = https://mirrors.aliyun.com/pypi/simple/\n[install]\ntrusted-host=mirrors.aliyun.com" > ~/.pip/pip.conf

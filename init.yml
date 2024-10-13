@@ -24,6 +24,8 @@
       ansible.builtin.pip:
         name: pwntools
       register: msg
+    - name: mnt-local-dir
+      shell: mkdir /mnt/hgfs;mount -t fuse.vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other
     - name: print-msg
       debug:
         var: msg.stdout
