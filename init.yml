@@ -26,14 +26,5 @@
       register: msg
     - name: mnt-local-dir
       shell: mkdir /mnt/hgfs;mount -t fuse.vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other
-    - name: print-msg
-      debug:
-        var: msg.stdout
-    - name: install libcSearch
-      ansible.builtin.pip:
-        name: LibcSearcher3
-      register: msg2
-    - name: print-msg
-      debug:
-        var: msg2.stdout
+
 
